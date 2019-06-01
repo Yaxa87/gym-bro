@@ -11,7 +11,8 @@ const WorkoutHistory = require('../../models/WorkoutHistory');
 // @access  Private
 router.get('/', passport.authenticate('jwt', {session: false}), (req, res) => {
     WorkoutHistory.findOne({user: req.user.id})
-        .then(history => res.json(history));
+        .then(history => res.json(history))
+        .catch(err => console.log(err));
 });
 
 // @route   POST api/workout
@@ -27,20 +28,21 @@ router.post('/', passport.authenticate('jwt', {session: false}), (req, res) => {
                     name: req.body.name
                 }
 
-                history.workout.unshift(newWorkoutHistory);
+                history.workouts.unshift(newWorkoutHistory);
     
-                history.save().then(history => res.json(history));
+                history.save().then(history => res.json(history)).catch(err => console.log(err));
             } else {
                 console.log('first workout')
                 // first saved workout
                 const newWorkoutHistory = new WorkoutHistory({
                     user: req.user.id,
-                    workout: [{name: req.body.name}]
+                    workouts: [{name: req.body.name}]
                 });
 
-                newWorkoutHistory.save().then(history => res.json(history));
+                newWorkoutHistory.save().then(history => res.json(history)).catch(err => console.log(err));
             }
-        });
+        })
+        .catch(err => console.log(err));
 });
 
 module.exports = router;

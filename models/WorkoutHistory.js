@@ -7,7 +7,7 @@ const WorkoutHistorySchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'users'
     },
-    workout: [
+    workouts: [
         {
             name: {
                 type: String,
