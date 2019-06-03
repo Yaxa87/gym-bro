@@ -12,7 +12,25 @@ const WorkoutHistorySchema = new Schema({
             name: {
                 type: String,
                 required: true
-            }
+            },
+            excercises: [
+                {
+                    name: {
+                        type: String,
+                        required: true
+                    },
+                    sets: [
+                        {
+                            reps: {
+                                type: String
+                            },
+                            weight: {
+                                type: String
+                            }
+                        }
+                    ]
+                }
+            ]
         }
     ]
 });

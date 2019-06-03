@@ -23,12 +23,8 @@ router.post('/', passport.authenticate('jwt', {session: false}), (req, res) => {
         .then(history => {
             if (history) {
                 console.log('workout exists')
-                // update workouts history
-                const newWorkoutHistory = {
-                    name: req.body.name
-                }
 
-                history.workouts.unshift(newWorkoutHistory);
+                history.workouts.unshift(req.body);
     
                 history.save().then(history => res.json(history)).catch(err => console.log(err));
             } else {
@@ -36,7 +32,7 @@ router.post('/', passport.authenticate('jwt', {session: false}), (req, res) => {
                 // first saved workout
                 const newWorkoutHistory = new WorkoutHistory({
                     user: req.user.id,
-                    workouts: [{name: req.body.name}]
+                    workouts: [req.body]
                 });
 
                 newWorkoutHistory.save().then(history => res.json(history)).catch(err => console.log(err));

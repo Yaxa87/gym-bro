@@ -26,13 +26,44 @@ class History extends Component {
         this.setState({workoutHistory: nextProps.workoutHistory.workouts});
     }
 
+    renderHistoryTable() {
+        return (
+            this.state.workoutHistory.map((item, index) => 
+                <div className="text-center" key={index}>
+                    <h3>{item.name}</h3>
+                    {item.excercises.map((excercise, index) => 
+                        <div key={index}>
+                            <h5 className="text-left">{excercise.name}</h5>
+                            <table className="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Set</th>
+                                        <th scope="col">Weight</th>
+                                        <th scope="col">Reps</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {excercise.sets.map((set, index) => 
+                                        <tr key={index}>
+                                            <th scope="row">{index}</th>
+                                            <td>{set.weight}</td>
+                                            <td>{set.reps}</td>
+                                        </tr>    
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
+                    )}
+                </div>
+            )
+        )
+    }
+
     render() {
         return (
             <div>
                 <h1 className="display-4 text-center">Workout History</h1>
-                <ul>
-                    {this.state.workoutHistory.map((item, index) => <li key={index}>workout name: {item.name}</li>)}
-                </ul>
+                {this.renderHistoryTable()}
             </div>
         )
     }

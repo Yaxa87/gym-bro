@@ -5,7 +5,7 @@ import { saveWorkout, updateCurrentWorkout } from '../../actions/workoutActions'
 import TextInputGroup from '../common/TextInputGroup';
 import Modal from 'react-modal';
 import ExcerciseList from './ExcerciseList';
-import CurrentExcercise from './CurrentExcercise';
+import Excercise from './Excercise';
 
 class Workout extends Component {
     constructor() {
@@ -32,91 +32,47 @@ class Workout extends Component {
     }
 
     selectExcercise = e => {
-        // Copy state
-        const excercisesCopy = [...this.state.currentWorkout.excercises];
-        excercisesCopy.push({
+        const currentWorkoutCopy = this.copyCurrentWorkoutState();
+        currentWorkoutCopy.excercises.push({
             name: e.target.value,
-            series: [{
+            sets: [{
                 reps: '',
                 weight: ''
             }]
         });
-
-        const newCurrentWorkout = {
-            name: this.state.currentWorkout.name,
-            excercises: excercisesCopy
-        }
         
-        this.setState({currentWorkout: newCurrentWorkout});
-        this.props.updateCurrentWorkout(newCurrentWorkout);
+        this.setState({currentWorkout: currentWorkoutCopy});
+        this.props.updateCurrentWorkout(currentWorkoutCopy);
+        this.closeModal();
     }
 
     onChangeName(e) {
-        const newCurrentWorkout = {
-            name: e.target.value,
-            excercises: this.state.currentWorkout.excercises.map(excercise => {
-                return {
-                    name: excercise.name,
-                    series: excercise.series.map(series => {
-                        return {...series};
-                    })
-                }
-            })
-        }
+        const currentWorkoutCopy = this.copyCurrentWorkoutState();
+        currentWorkoutCopy.name = e.target.value
 
-        this.setState({ currentWorkout: newCurrentWorkout });
-        this.props.updateCurrentWorkout(newCurrentWorkout);
+        this.setState({ currentWorkout: currentWorkoutCopy });
+        this.props.updateCurrentWorkout(currentWorkoutCopy);
     }
 
-    handleSeriesChange = (e, excercise, series) => {
-        // Copy state
-        const excercisesCopy = this.state.currentWorkout.excercises.map(excercise => {
-            return {
-                name: excercise.name,
-                series: excercise.series.map(series => {
-                    return {...series};
-                })
-            }
-        });
+    handleSetChange = (e, excercise, set) => {
+        const currentWorkoutCopy = this.copyCurrentWorkoutState();
 
-        excercisesCopy[excercise-1].series[series-1][e.target.name] = e.target.value;
+        currentWorkoutCopy.excercises[excercise-1].sets[set-1][e.target.name] = e.target.value;
 
-        const newCurrentWorkout = {
-            name: this.state.currentWorkout.name,
-            excercises: excercisesCopy
-        }
-
-        this.setState({currentWorkout: newCurrentWorkout});
-        this.props.updateCurrentWorkout(newCurrentWorkout);
+        this.setState({currentWorkout: currentWorkoutCopy});
+        this.props.updateCurrentWorkout(currentWorkoutCopy);
     }
 
-    addSeries = (e, excercise) => {
-        console.log('addSeries', excercise)
-        // Copy state
-        const excercisesCopy = this.state.currentWorkout.excercises.map(excercise => {
-            return {
-                name: excercise.name,
-                series: excercise.series.map(series => {
-                    return {...series};
-                })
-            }
-        });
+    addSet = (e, excercise) => {
+        const currentWorkoutCopy = this.copyCurrentWorkoutState();
 
-        console.log(excercisesCopy)
-
-        excercisesCopy[excercise-1].series.push({
+        currentWorkoutCopy.excercises[excercise-1].sets.push({
             reps: '',
             weight: ''
         });
 
-        const newCurrentWorkout = {
-            name: this.state.currentWorkout.name,
-            excercises: excercisesCopy
-        }
-
-        console.log(newCurrentWorkout);
-
-        this.setState({currentWorkout: newCurrentWorkout});
+        this.setState({currentWorkout: currentWorkoutCopy});
+        this.props.updateCurrentWorkout(currentWorkoutCopy);
     }
 
     onSubmit(e) {
@@ -130,6 +86,34 @@ class Workout extends Component {
 
     closeModal() {
         this.setState({modalIsOpen: false});
+    }
+
+    copyCurrentWorkoutState() {
+        return {
+            name: this.state.currentWorkout.name,
+            excercises: this.state.currentWorkout.excercises.map(excercise => {
+                return {
+                    name: excercise.name,
+                    sets: excercise.sets.map(set => {
+                        return {...set};
+                    })
+                }
+            })
+        }
+    }
+
+    renderExcercises() {
+        return (
+            this.state.currentWorkout.excercises.map((excercise, index) => <Excercise 
+                key={index} 
+                excercise={index+1}
+                sets={excercise.sets}
+                name={excercise.name} 
+                addSet={this.addSet}
+                handleSetChange={this.handleSetChange} 
+                
+            />)
+        )
     }
 
     render() {
@@ -146,15 +130,7 @@ class Workout extends Component {
                                 onChange={this.onChangeName}
                             />
 
-                            {this.state.currentWorkout.excercises.map((excercise, index) => <CurrentExcercise 
-                                                                                                key={index} 
-                                                                                                excercise={index+1}
-                                                                                                series={excercise.series}
-                                                                                                name={excercise.name} 
-                                                                                                addSeries={this.addSeries}
-                                                                                                handleSeriesChange={this.handleSeriesChange} 
-                                                                                                
-                                                                                            />)}
+                            {this.renderExcercises()}
             
                             <button type="button" className="btn btn-primary btn-block" onClick={this.openModal}>Add excercise</button>
                             <Modal
