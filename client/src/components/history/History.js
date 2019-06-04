@@ -45,8 +45,8 @@ class History extends Component {
                                 <tbody>
                                     {excercise.sets.map((set, index) => 
                                         <tr key={index}>
-                                            <th scope="row">{index}</th>
-                                            <td>{set.weight}</td>
+                                            <th scope="row">{index+1}</th>
+                                            <td>{set.weight}{excercise.weightUnit === "no" ? "" : excercise.weightUnit}</td>
                                             <td>{set.reps}</td>
                                         </tr>    
                                     )}

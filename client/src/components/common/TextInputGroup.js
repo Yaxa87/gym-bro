@@ -13,7 +13,7 @@ const TextInputGroup = ({
     disabled
 }) => {
     return (
-        <div className="form-group">
+        <div className="mb-1">
             <input
                 type={type}
                 className={classnames("form-control form-control-md", {
@@ -34,7 +34,7 @@ const TextInputGroup = ({
 TextInputGroup.propTypes = {
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
-    value: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     error: PropTypes.string,
     info: PropTypes.string,
     type: PropTypes.string.isRequired,

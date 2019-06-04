@@ -13,9 +13,17 @@ const WorkoutHistorySchema = new Schema({
                 type: String,
                 required: true
             },
+            date: {
+                type: Date,
+                required: true
+            },
             excercises: [
                 {
                     name: {
+                        type: String,
+                        required: true
+                    },
+                    weightUnit: {
                         type: String,
                         required: true
                     },

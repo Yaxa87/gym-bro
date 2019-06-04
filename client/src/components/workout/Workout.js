@@ -14,6 +14,7 @@ class Workout extends Component {
             modalIsOpen: false,
             currentWorkout: {
                 name: '',
+                date: new Date(),
                 excercises: []
             }
         }
@@ -35,6 +36,7 @@ class Workout extends Component {
         const currentWorkoutCopy = this.copyCurrentWorkoutState();
         currentWorkoutCopy.excercises.push({
             name: e.target.value,
+            weightUnit: 'kg',
             sets: [{
                 reps: '',
                 weight: ''
@@ -63,7 +65,7 @@ class Workout extends Component {
         this.props.updateCurrentWorkout(currentWorkoutCopy);
     }
 
-    addSet = (e, excercise) => {
+    addSet = (excercise) => {
         const currentWorkoutCopy = this.copyCurrentWorkoutState();
 
         currentWorkoutCopy.excercises[excercise-1].sets.push({
@@ -75,8 +77,32 @@ class Workout extends Component {
         this.props.updateCurrentWorkout(currentWorkoutCopy);
     }
 
+    removeSet = (excercise, set) => {
+        console.log('removing set', excercise, set)
+        const currentWorkoutCopy = this.copyCurrentWorkoutState();
+
+        // Remove whole excercise if only one set exists
+        if (currentWorkoutCopy.excercises[excercise-1].sets.length === 1) {
+            currentWorkoutCopy.excercises.splice(excercise-1, 1);
+        } else {
+            currentWorkoutCopy.excercises[excercise-1].sets.splice(set-1, 1);
+        }
+        
+        this.setState({currentWorkout: currentWorkoutCopy});
+        this.props.updateCurrentWorkout(currentWorkoutCopy);
+    }
+
+    changeWeightUnit = (e, excercise) => {
+        const currentWorkoutCopy = this.copyCurrentWorkoutState();
+        currentWorkoutCopy.excercises[excercise - 1].weightUnit = e.target.value;
+        
+        this.setState({currentWorkout: currentWorkoutCopy});
+        this.props.updateCurrentWorkout(currentWorkoutCopy);
+    }
+
     onSubmit(e) {
         e.preventDefault();
+        console.log(this.state.currentWorkout)
         this.props.saveWorkout(this.state.currentWorkout);
     }
 
@@ -91,9 +117,11 @@ class Workout extends Component {
     copyCurrentWorkoutState() {
         return {
             name: this.state.currentWorkout.name,
+            date: this.state.currentWorkout.date,
             excercises: this.state.currentWorkout.excercises.map(excercise => {
                 return {
                     name: excercise.name,
+                    weightUnit: excercise.weightUnit,
                     sets: excercise.sets.map(set => {
                         return {...set};
                     })
@@ -111,7 +139,8 @@ class Workout extends Component {
                 name={excercise.name} 
                 addSet={this.addSet}
                 handleSetChange={this.handleSetChange} 
-                
+                removeSet={this.removeSet}
+                changeWeightUnit={this.changeWeightUnit}
             />)
         )
     }

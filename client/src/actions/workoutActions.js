@@ -4,6 +4,10 @@ import { SAVE_WORKOUT, GET_WORKOUTS, UPDATE_CURRENT_WORKOUT } from './types';
 
 // Save workout
 export const saveWorkout = workoutData => dispatch => {
+    // Check for workout name, if empty use workout date as name
+    // TODO: move to separate function and clean up
+    workoutData.name = workoutData.name || `${workoutData.date.getYear() + 1900}-${workoutData.date.getMonth() + 1}-${workoutData.date.getDate()}`; 
+
     axios.post('api/workout', workoutData)
         .then(res => 
             dispatch({

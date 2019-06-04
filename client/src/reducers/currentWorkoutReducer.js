@@ -3,6 +3,7 @@ import { SAVE_WORKOUT, UPDATE_CURRENT_WORKOUT } from '../actions/types'
 const initialState = {
     saved: false,
     name: '',
+    date: new Date(),
     excercises: []
 }
 

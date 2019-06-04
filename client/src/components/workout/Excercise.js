@@ -13,6 +13,7 @@ class Excercise extends Component {
                                 onChange={this.props.handleSetChange} 
                                 reps={this.props.sets[i].reps} 
                                 weight={this.props.sets[i].weight} 
+                                removeSet={this.props.removeSet}
                             />)
         }
         return setsArray;
@@ -21,16 +22,19 @@ class Excercise extends Component {
     render() {
         return (
             <div className="mb-2">
-                {this.props.name}
-
+                <h2 className="h5">{this.props.name}</h2>
                 <div className="form-row">
                     <div className="col-2">
                         <label>Set</label>
                     </div>
-                    <div className="col-5">
-                        <label>Weight</label>
+                    <div className="col-4">
+                        <select onChange={(e) => this.props.changeWeightUnit(e, this.props.excercise)}>
+                            <option value="kg">KG</option>
+                            <option value="lbs">LBS</option>
+                            <option value="no">No.</option>
+                        </select>
                     </div>
-                    <div className="col-5">
+                    <div className="col-4">
                         <label>Reps</label>
                     </div>
                 </div>
@@ -39,8 +43,8 @@ class Excercise extends Component {
 
                 <button 
                     type="button" 
-                    className="btn btn-info btn-block" 
-                    onClick={(e) => this.props.addSet(e, this.props.excercise)}
+                    className="btn btn-outline-info btn-block mt-2" 
+                    onClick={(e) => this.props.addSet(this.props.excercise)}
                 >
                     Add set
                 </button>
@@ -54,7 +58,9 @@ Excercise.propTypes = {
     handleSetChange: PropTypes.func.isRequired,
     addSet: PropTypes.func.isRequired,
     sets: PropTypes.array.isRequired,
-    name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
+    removeSet: PropTypes.func.isRequired,
+    changeWeightUnit: PropTypes.func.isRequired
 }
 
 export default Excercise;
