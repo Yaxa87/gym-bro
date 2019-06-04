@@ -8,21 +8,13 @@ import ExcerciseList from './ExcerciseList';
 import Excercise from './Excercise';
 
 class Workout extends Component {
-    constructor() {
-        super()
-        this.state = {
-            modalIsOpen: false,
-            currentWorkout: {
-                name: '',
-                date: new Date(),
-                excercises: []
-            }
+    state = {
+        modalIsOpen: false,
+        currentWorkout: {
+            name: '',
+            date: new Date(),
+            excercises: []
         }
-
-        this.onChangeName = this.onChangeName.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-        this.openModal = this.openModal.bind(this);
-        this.closeModal = this.closeModal.bind(this);
     }
 
     componentDidMount() {
@@ -32,7 +24,7 @@ class Workout extends Component {
         }
     }
 
-    selectExcercise = e => {
+    handleSelectExcercise = e => {
         const currentWorkoutCopy = this.copyCurrentWorkoutState();
         currentWorkoutCopy.excercises.push({
             name: e.target.value,
@@ -45,10 +37,10 @@ class Workout extends Component {
         
         this.setState({currentWorkout: currentWorkoutCopy});
         this.props.updateCurrentWorkout(currentWorkoutCopy);
-        this.closeModal();
+        this.handleCloseModal();
     }
 
-    onChangeName(e) {
+    handleChangeName = e => {
         const currentWorkoutCopy = this.copyCurrentWorkoutState();
         currentWorkoutCopy.name = e.target.value
 
@@ -58,16 +50,14 @@ class Workout extends Component {
 
     handleSetChange = (e, excercise, set) => {
         const currentWorkoutCopy = this.copyCurrentWorkoutState();
-
         currentWorkoutCopy.excercises[excercise-1].sets[set-1][e.target.name] = e.target.value;
 
         this.setState({currentWorkout: currentWorkoutCopy});
         this.props.updateCurrentWorkout(currentWorkoutCopy);
     }
 
-    addSet = (excercise) => {
+    handleAddSet = excercise => {
         const currentWorkoutCopy = this.copyCurrentWorkoutState();
-
         currentWorkoutCopy.excercises[excercise-1].sets.push({
             reps: '',
             weight: ''
@@ -77,8 +67,7 @@ class Workout extends Component {
         this.props.updateCurrentWorkout(currentWorkoutCopy);
     }
 
-    removeSet = (excercise, set) => {
-        console.log('removing set', excercise, set)
+    handleRemoveSet = (excercise, set) => {
         const currentWorkoutCopy = this.copyCurrentWorkoutState();
 
         // Remove whole excercise if only one set exists
@@ -92,7 +81,7 @@ class Workout extends Component {
         this.props.updateCurrentWorkout(currentWorkoutCopy);
     }
 
-    changeWeightUnit = (e, excercise) => {
+    handleChangeWeightUnit = (e, excercise) => {
         const currentWorkoutCopy = this.copyCurrentWorkoutState();
         currentWorkoutCopy.excercises[excercise - 1].weightUnit = e.target.value;
         
@@ -100,17 +89,16 @@ class Workout extends Component {
         this.props.updateCurrentWorkout(currentWorkoutCopy);
     }
 
-    onSubmit(e) {
+    onSubmit = e => {
         e.preventDefault();
-        console.log(this.state.currentWorkout)
         this.props.saveWorkout(this.state.currentWorkout);
     }
 
-    openModal() {
+    handleOpenModal = () => {
         this.setState({modalIsOpen: true});
     }
 
-    closeModal() {
+    handleCloseModal = () => {
         this.setState({modalIsOpen: false});
     }
 
@@ -137,10 +125,10 @@ class Workout extends Component {
                 excercise={index+1}
                 sets={excercise.sets}
                 name={excercise.name} 
-                addSet={this.addSet}
+                handleAddSet={this.handleAddSet}
                 handleSetChange={this.handleSetChange} 
-                removeSet={this.removeSet}
-                changeWeightUnit={this.changeWeightUnit}
+                onRemoveSet={this.handleRemoveSet}
+                handleChangeWeightUnit={this.handleChangeWeightUnit}
             />)
         )
     }
@@ -156,12 +144,12 @@ class Workout extends Component {
                                 name="name"
                                 placeholder="Workout name"
                                 value={this.state.currentWorkout.name}
-                                onChange={this.onChangeName}
+                                onChange={this.handleChangeName}
                             />
 
                             {this.renderExcercises()}
             
-                            <button type="button" className="btn btn-primary btn-block" onClick={this.openModal}>Add excercise</button>
+                            <button type="button" className="btn btn-primary btn-block" onClick={this.handleOpenModal}>Add excercise</button>
                             <Modal
                                 isOpen={this.state.modalIsOpen}
                                 ariaHideApp={false}
@@ -180,7 +168,7 @@ class Workout extends Component {
                                       }
                                 }}
                             >
-                                <ExcerciseList onClick={this.selectExcercise} />
+                                <ExcerciseList handleSelectExcercise={this.handleSelectExcercise} />
                             </Modal>
                             <hr />
                             <input type="submit" value="Save workout" className="btn btn-success btn-block" />

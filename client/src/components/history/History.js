@@ -4,11 +4,8 @@ import { connect } from 'react-redux';
 import { getWorkouts } from '../../actions/workoutActions';
 
 class History extends Component {
-    constructor() {
-        super();
-        this.state = {
-            workoutHistory: []
-        }
+    state = {
+        workoutHistory: []
     }
 
     componentDidMount() {
@@ -21,8 +18,6 @@ class History extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps);
-
         this.setState({workoutHistory: nextProps.workoutHistory.workouts});
     }
 

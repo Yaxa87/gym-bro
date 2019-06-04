@@ -13,7 +13,7 @@ class Excercise extends Component {
                                 onChange={this.props.handleSetChange} 
                                 reps={this.props.sets[i].reps} 
                                 weight={this.props.sets[i].weight} 
-                                removeSet={this.props.removeSet}
+                                onRemoveSet={this.props.onRemoveSet}
                             />)
         }
         return setsArray;
@@ -28,7 +28,7 @@ class Excercise extends Component {
                         <label>Set</label>
                     </div>
                     <div className="col-4">
-                        <select onChange={(e) => this.props.changeWeightUnit(e, this.props.excercise)}>
+                        <select onChange={(e) => this.props.handleChangeWeightUnit(e, this.props.excercise)}>
                             <option value="kg">KG</option>
                             <option value="lbs">LBS</option>
                             <option value="no">No.</option>
@@ -44,7 +44,7 @@ class Excercise extends Component {
                 <button 
                     type="button" 
                     className="btn btn-outline-info btn-block mt-2" 
-                    onClick={(e) => this.props.addSet(this.props.excercise)}
+                    onClick={(e) => this.props.handleAddSet(this.props.excercise)}
                 >
                     Add set
                 </button>
@@ -56,11 +56,11 @@ class Excercise extends Component {
 Excercise.propTypes = {
     excercise: PropTypes.number.isRequired,
     handleSetChange: PropTypes.func.isRequired,
-    addSet: PropTypes.func.isRequired,
+    handleAddSet: PropTypes.func.isRequired,
     sets: PropTypes.array.isRequired,
     name: PropTypes.string.isRequired,
-    removeSet: PropTypes.func.isRequired,
-    changeWeightUnit: PropTypes.func.isRequired
+    onRemoveSet: PropTypes.func.isRequired,
+    handleChangeWeightUnit: PropTypes.func.isRequired
 }
 
 export default Excercise;

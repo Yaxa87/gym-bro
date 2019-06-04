@@ -8,7 +8,7 @@ const Set = ({
     onChange,
     weight,
     reps,
-    removeSet
+    onRemoveSet
 }) => {
     return (
         <div className="form-row">
@@ -34,7 +34,7 @@ const Set = ({
                 />
             </div>
             <div className="col-2">
-                <span className="form-control text-center" onClick={(e) => removeSet(excercise, setNumber)}>
+                <span className="form-control text-center" onClick={(e) => onRemoveSet(excercise, setNumber)}>
                     <i className="fas fa-trash-alt"></i>
                 </span>
             </div>
@@ -48,7 +48,7 @@ History.propTypes = {
     onChange: PropTypes.func.isRequired,
     reps: PropTypes.string.isRequired,
     weight: PropTypes.string.isRequired,
-    removeSet: PropTypes.func.isRequired
+    onRemoveSet: PropTypes.func.isRequired
 }
 
 export default Set;
