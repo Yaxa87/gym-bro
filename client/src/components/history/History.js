@@ -23,13 +23,13 @@ class History extends Component {
 
     renderHistoryTable() {
         return (
-            this.state.workoutHistory.map((item, index) => 
-                <div className="text-center" key={index}>
-                    <h3>{item.name}</h3>
-                    {item.excercises.map((excercise, index) => 
+            this.state.workoutHistory.map((workout, index) => 
+                <div className="text-center mb-4" key={index}>
+                    <h2 className="h5 workout-title">{workout.name} <small>{workout.date.slice(0, 10)}</small></h2>
+                    {workout.excercises.map((excercise, index) => 
                         <div key={index}>
-                            <h5 className="text-left">{excercise.name}</h5>
-                            <table className="table">
+                            <h3 className="text-left h6">{excercise.name}</h3>
+                            <table className="table excercise-container">
                                 <thead>
                                     <tr>
                                         <th scope="col">Set</th>
@@ -57,7 +57,7 @@ class History extends Component {
     render() {
         return (
             <div>
-                <h1 className="text-center">Workout History</h1>
+                <h1 className="h2 text-center mb-4">Workout History</h1>
                 {this.renderHistoryTable()}
             </div>
         )
