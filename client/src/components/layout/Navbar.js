@@ -1,64 +1,29 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { logoutUser } from '../../actions/authActions';
 
-class Navbar extends Component {
-    onLogoutClick(e) {
-        e.preventDefault();
-        this.props.logoutUser();
-    }
-    render() {
-        const { isAuthenticated } = this.props.auth;
-
-        const authNav = (
-            <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
-                    <a href="# " className="nav-link" onClick={this.onLogoutClick.bind(this)}>Logout</a>
-                </li>
-            </ul>
-        );
-
-        const guestNav = (
-            <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
-                    <Link className="nav-link" to="/register">Sign Up</Link>
-                </li>
-                <li className="nav-item">
-                    <Link className="nav-link" to="/login">Login</Link>
-                </li>
-            </ul>
-        );
-
-        return (
-            <nav className="navbar navbar-dark bg-dark mb-4">
-                <div className="container">
-                    <Link className="navbar-brand" to="/">GymBro</Link>
-
-                    <ul className="navbar-nav mr-auto">
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/history">History</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/workout">Workout</Link>
-                        </li>
-                    </ul>
-
-                    {isAuthenticated ? authNav : guestNav}
-                </div>
-            </nav>
-        )
-    }
+const Navbar = () => {
+    return (
+        <nav className="navigation">
+            <div className="navigation-item">
+                <Link className="navigation-link" to="/history">
+                    <i className="fas fa-history d-block text-center"></i>
+                    HISTORY
+                </Link>
+            </div>
+            <div className="navigation-item">
+                <Link className="navigation-link" to="/workout">
+                    <i className="fas fa-dumbbell d-block text-center"></i>
+                    WORKOUT
+                </Link>
+            </div>
+            <div className="navigation-item">
+                <Link className="navigation-link" to="/user">
+                    <i className="fas fa-user d-block text-center"></i>
+                    USER
+                </Link>
+            </div>            
+        </nav>
+    )
 }
 
-Navbar.propTypes = {
-    logoutUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
-}
-
-const mapStateToProps = state => ({
-    auth: state.auth
-});
-
-export default connect(mapStateToProps, {logoutUser})(Navbar);
+export default Navbar;

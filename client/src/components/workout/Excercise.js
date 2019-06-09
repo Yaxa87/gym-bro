@@ -22,7 +22,7 @@ class Excercise extends Component {
     render() {
         return (
             <div className="mb-3 mt-3">
-                <h2 className="h5">{this.props.name}</h2>
+                <h2 className="h5 blue-title">{this.props.name}</h2>
 
                 <div className="excercise-container">
                     <div className="form-row">
@@ -51,6 +51,7 @@ class Excercise extends Component {
                     className="btn btn-outline-info btn-block mt-2" 
                     onClick={(e) => this.props.handleAddSet(this.props.excercise)}
                 >
+                    <i className="fas fa-plus mr-1"></i>
                     Add set
                 </button>
             </div>

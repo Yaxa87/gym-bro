@@ -8,12 +8,12 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 import Navbar from './components/layout/Navbar';
-import Footer from './components/layout/Footer';
 import Landing from './components/layout/Landing';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import History from './components/history/History';
 import Workout from './components/workout/Workout';
+import User from './components/user/User';
 
 import './App.css';
 
@@ -38,7 +38,8 @@ function App() {
 			<Router>
 				<div className="App">
 					<Route exact path="/" component={Landing} />
-					<div className="container">
+					<div className="container app-container">
+						<Route exact path="/user" component={User} />
 						<Route exact path="/register" component={Register} />
 						<Route exact path="/login" component={Login} />
 						<Route exact path="/history" component={History} />

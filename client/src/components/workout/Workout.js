@@ -6,6 +6,7 @@ import TextInputGroup from '../common/TextInputGroup';
 import Modal from 'react-modal';
 import ExcerciseList from './ExcerciseList';
 import Excercise from './Excercise';
+import HeadBar from '../common/HeadBar';
 
 class Workout extends Component {
     state = {
@@ -135,45 +136,47 @@ class Workout extends Component {
 
     render() {
         return (
-            <div className="row">
-                <div className="col-md-8 m-auto">
-                    <h1 className="h2 text-center">Workout</h1>
-                    <form onSubmit={this.onSubmit}>
-                        <div className="mb-2">
-                            <TextInputGroup 
-                                name="name"
-                                placeholder="Workout name"
-                                value={this.state.currentWorkout.name}
-                                onChange={this.handleChangeName}
-                            />
-                        </div>
+            <div>
+                <HeadBar pageTitle="Workout" />
+                <div className="row">
+                    <div className="col-md-8 m-auto">
+                        <form onSubmit={this.onSubmit}>
+                            <div className="mb-3">
+                                <TextInputGroup 
+                                    name="name"
+                                    placeholder="Enter name for the workout"
+                                    value={this.state.currentWorkout.name}
+                                    onChange={this.handleChangeName}
+                                />
+                            </div>
 
-                        {this.renderExcercises()}
-        
-                        <button type="button" className="btn btn-primary btn-block" onClick={this.handleOpenModal}>Add excercise</button>
-                        <Modal
-                            isOpen={this.state.modalIsOpen}
-                            ariaHideApp={false}
-                            onRequestClose={this.handleCloseModal}
-                            style={{
-                                overlay: {
-                                    backgroundColor: 'rgba(0, 0, 0, 0.75)'
-                                    },
-                                    content: {
-                                    top: '80px',
-                                    bottom: '80px',
-                                    left: '10px',
-                                    right: '10px',
-                                    border: 'none',
-                                    borderRadius: '20px'
-                                    }
-                            }}
-                        >
-                            <ExcerciseList handleSelectExcercise={this.handleSelectExcercise} handleCloseModal={this.handleCloseModal} />
-                        </Modal>
-                        <hr />
-                        <input type="submit" value="Save workout" className="btn btn-success btn-block" />
-                    </form>
+                            {this.renderExcercises()}
+            
+                            <button type="button" className="btn btn-primary btn-block" onClick={this.handleOpenModal}>Add excercise</button>
+                            <Modal
+                                isOpen={this.state.modalIsOpen}
+                                ariaHideApp={false}
+                                onRequestClose={this.handleCloseModal}
+                                style={{
+                                    overlay: {
+                                        backgroundColor: 'rgba(0, 0, 0, 0.75)'
+                                        },
+                                        content: {
+                                        top: '80px',
+                                        bottom: '80px',
+                                        left: '10px',
+                                        right: '10px',
+                                        border: 'none',
+                                        borderRadius: '20px'
+                                        }
+                                }}
+                            >
+                                <ExcerciseList handleSelectExcercise={this.handleSelectExcercise} handleCloseModal={this.handleCloseModal} />
+                            </Modal>
+                            <hr />
+                            <input type="submit" value="Save workout" className="btn btn-success btn-block" />
+                        </form>
+                    </div>
                 </div>
             </div>
         )

@@ -30,12 +30,18 @@ img {
 	height: 100%;
 }
 
+.app-container {
+	min-height: 100vh;
+	padding-bottom: 80px;
+}
+
 .excercise-container {
 	background-color: white;
 	padding: 5px 5px 12px 5px;
 }
 
-.workout-title {
+.blue-title {
+	padding: 3px;
 	background-color: #C7E9F5;
 	line-height: 1.4em;
 }
@@ -55,4 +61,43 @@ img {
 .table.excercise-container td,
 .table.excercise-container th {
 	padding: 0.35rem;
+}
+
+.head-bar {
+	padding: 5px;
+	margin: 0 -15px 10px -15px;
+	text-align: center;
+	background-color: #030A1A;
+	color: white;
+}
+
+.head-bar h1 {
+	font-size: 1.8rem;
+	margin-bottom: 3px;
+}
+
+.head-bar .logo {
+	position: absolute;
+	top: 20px;
+	left: 10px;
+	font-size: 0.8em;
+}
+
+/* Navbar */
+
+.navigation {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: #030A1A;
+	padding: 12px 0 8px 0;
+}
+
+.navigation .navigation-link {
+	color: white;
+	font-size: .8em;
 }
