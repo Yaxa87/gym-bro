@@ -137,7 +137,7 @@ class Workout extends Component {
         return (
             <div className="row">
                 <div className="col-md-8 m-auto">
-                    <h1 className="text-center">Workout</h1>
+                    <h1 className="h2 text-center">Workout</h1>
                     <form onSubmit={this.onSubmit}>
                         <div className="mb-2">
                             <TextInputGroup 

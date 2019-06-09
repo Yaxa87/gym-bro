@@ -37,7 +37,6 @@ function App() {
 		<Provider store={store}>
 			<Router>
 				<div className="App">
-					<Navbar />
 					<Route exact path="/" component={Landing} />
 					<div className="container">
 						<Route exact path="/register" component={Register} />
@@ -45,7 +44,7 @@ function App() {
 						<Route exact path="/history" component={History} />
 						<Route exact path="/workout" component={Workout} />
 					</div>
-					<Footer />
+					<Navbar />
 				</div>
 			</Router>
 		</Provider>
