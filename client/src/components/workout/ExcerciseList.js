@@ -2,10 +2,12 @@ import React from 'react';
 import PropTypes from "prop-types";
 
 const ExcerciseList = ({
-    handleSelectExcercise
+    handleSelectExcercise,
+    handleCloseModal
 }) => {
     return (
         <div>
+            <i style={{position: 'fixed', right: '30px'}} onClick={handleCloseModal} className="fas fa-times"></i>
             <h2 className="text-center">Chest</h2>
             <button type="button" className="btn btn-light btn-block" value="Barbell Bench Press" onClick={handleSelectExcercise}>Barbell Bench Press</button>
             <button type="button" className="btn btn-light btn-block" value="Dumbell Bench Press" onClick={handleSelectExcercise}>Dumbell Bench Press</button>
@@ -63,7 +65,8 @@ const ExcerciseList = ({
 }
 
 ExcerciseList.propTypes = {
-    handleSelectExcercise: PropTypes.func.isRequired
+    handleSelectExcercise: PropTypes.func.isRequired,
+    handleCloseModal: PropTypes.func.isRequired
 }
 
 export default ExcerciseList;

@@ -21,26 +21,31 @@ class Excercise extends Component {
 
     render() {
         return (
-            <div className="mb-2">
+            <div className="mb-3 mt-3">
                 <h2 className="h5">{this.props.name}</h2>
-                <div className="form-row">
-                    <div className="col-2">
-                        <label>Set</label>
+
+                <div className="excercise-container">
+                    <div className="form-row">
+                        <div className="col-2">
+                            <label className="form-control no-border">Set</label>
+                        </div>
+                        <div className="col-4">
+                            <div className="form-control no-border">
+                                <select onChange={(e) => this.props.handleChangeWeightUnit(e, this.props.excercise)}>
+                                    <option value="kg">KG</option>
+                                    <option value="lbs">LBS</option>
+                                    <option value="no">No.</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div className="col-4">
+                            <label className="form-control no-border">Reps</label>
+                        </div>
                     </div>
-                    <div className="col-4">
-                        <select onChange={(e) => this.props.handleChangeWeightUnit(e, this.props.excercise)}>
-                            <option value="kg">KG</option>
-                            <option value="lbs">LBS</option>
-                            <option value="no">No.</option>
-                        </select>
-                    </div>
-                    <div className="col-4">
-                        <label>Reps</label>
-                    </div>
+                    
+                    {this.renderSets()}
                 </div>
                 
-                {this.renderSets()}
-
                 <button 
                     type="button" 
                     className="btn btn-outline-info btn-block mt-2" 

@@ -57,7 +57,7 @@ class History extends Component {
     render() {
         return (
             <div>
-                <h1 className="display-4 text-center">Workout History</h1>
+                <h1 className="text-center">Workout History</h1>
                 {this.renderHistoryTable()}
             </div>
         )

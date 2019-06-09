@@ -13,7 +13,7 @@ const Set = ({
     return (
         <div className="form-row">
             <div className="col-2">
-                <input value={setNumber} className="form-control form-control-md" disabled></input>
+                <div className="form-control no-border">{setNumber}</div>
             </div>
             <div className="col-4">
                 <TextInputGroup 
@@ -34,8 +34,8 @@ const Set = ({
                 />
             </div>
             <div className="col-2">
-                <span className="form-control text-center" onClick={(e) => onRemoveSet(excercise, setNumber)}>
-                    <i className="fas fa-trash-alt"></i>
+                <span className="form-control text-center no-border" onClick={(e) => onRemoveSet(excercise, setNumber)}>
+                    <i className="fas fa-times"></i>
                 </span>
             </div>
         </div>

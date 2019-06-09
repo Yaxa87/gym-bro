@@ -13,10 +13,10 @@ const TextInputGroup = ({
     disabled
 }) => {
     return (
-        <div className="mb-1">
+        <div>
             <input
                 type={type}
-                className={classnames("form-control form-control-md", {
+                className={classnames("form-control text-input-group", {
                 "is-invalid": error
                 })}
                 placeholder={placeholder}

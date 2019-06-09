@@ -138,14 +138,16 @@ class Workout extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-md-8 m-auto">
-                        <h1 className="display-4 text-center">Workout</h1>
+                        <h1 className="text-center">Workout</h1>
                         <form onSubmit={this.onSubmit}>
-                            <TextInputGroup 
-                                name="name"
-                                placeholder="Workout name"
-                                value={this.state.currentWorkout.name}
-                                onChange={this.handleChangeName}
-                            />
+                            <div className="mb-2">
+                                <TextInputGroup 
+                                    name="name"
+                                    placeholder="Workout name"
+                                    value={this.state.currentWorkout.name}
+                                    onChange={this.handleChangeName}
+                                />
+                            </div>
 
                             {this.renderExcercises()}
             
@@ -153,7 +155,7 @@ class Workout extends Component {
                             <Modal
                                 isOpen={this.state.modalIsOpen}
                                 ariaHideApp={false}
-                                onRequestClose={this.closeModal}
+                                onRequestClose={this.handleCloseModal}
                                 style={{
                                     overlay: {
                                         backgroundColor: 'rgba(0, 0, 0, 0.75)'
@@ -168,7 +170,7 @@ class Workout extends Component {
                                       }
                                 }}
                             >
-                                <ExcerciseList handleSelectExcercise={this.handleSelectExcercise} />
+                                <ExcerciseList handleSelectExcercise={this.handleSelectExcercise} handleCloseModal={this.handleCloseModal} />
                             </Modal>
                             <hr />
                             <input type="submit" value="Save workout" className="btn btn-success btn-block" />
