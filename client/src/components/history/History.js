@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getWorkouts } from '../../actions/workoutActions';
+import HeadBar from '../common/HeadBar';
 
 class History extends Component {
     state = {
@@ -25,10 +26,10 @@ class History extends Component {
         return (
             this.state.workoutHistory.map((workout, index) => 
                 <div className="text-center mb-4" key={index}>
-                    <h2 className="h5 workout-title">{workout.name} <small>{workout.date.slice(0, 10)}</small></h2>
+                    <h2 className="h5 blue-title">{workout.name} <small>{workout.date.slice(0, 10)}</small></h2>
                     {workout.excercises.map((excercise, index) => 
                         <div key={index}>
-                            <h3 className="text-left h6">{excercise.name}</h3>
+                            <h3 className="text-left h6 font-weight-bold">{excercise.name}</h3>
                             <table className="table excercise-container">
                                 <thead>
                                     <tr>
@@ -57,7 +58,7 @@ class History extends Component {
     render() {
         return (
             <div>
-                <h1 className="h2 text-center mb-4">Workout History</h1>
+                <HeadBar pageTitle="Workout History" />
                 {this.renderHistoryTable()}
             </div>
         )

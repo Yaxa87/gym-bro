@@ -13,7 +13,7 @@ const Set = ({
     return (
         <div className="form-row">
             <div className="col-2">
-                <div className="form-control no-border">{setNumber}</div>
+                <div className="form-control no-border">#{setNumber}</div>
             </div>
             <div className="col-4">
                 <TextInputGroup 
