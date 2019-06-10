@@ -58,6 +58,11 @@ img {
 	border: none;
 }
 
+.dropdown-no-border {
+	border: none;
+	color: inherit;
+}
+
 .table.excercise-container td,
 .table.excercise-container th {
 	padding: 0.35rem;
@@ -94,10 +99,14 @@ img {
 	left: 0;
 	right: 0;
 	background-color: #030A1A;
-	padding: 12px 0 8px 0;
+	padding: 10px 0 6px 0;
 }
 
 .navigation .navigation-link {
 	color: white;
-	font-size: .8em;
+	font-size: .7em;
+}
+
+.navigation .navigation-link:focus {
+	text-decoration: none;
 }

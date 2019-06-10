@@ -29,7 +29,7 @@ class History extends Component {
                     <h2 className="h5 blue-title">{workout.name} <small>{workout.date.slice(0, 10)}</small></h2>
                     {workout.excercises.map((excercise, index) => 
                         <div key={index}>
-                            <h3 className="text-left h6">{excercise.name}</h3>
+                            <h3 className="text-left h6 font-weight-bold">{excercise.name}</h3>
                             <table className="table excercise-container">
                                 <thead>
                                     <tr>
