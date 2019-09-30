@@ -107,6 +107,7 @@ img {
 	font-size: .7em;
 }
 
-.navigation .navigation-link:focus {
+.navigation .navigation-link:focus,
+.navigation .navigation-link:hover {
 	text-decoration: none;
 }

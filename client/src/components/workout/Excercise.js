@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import Set from './Set';
+import LastTime from './LastTime';
 
 class Excercise extends Component {
     renderSets() {
@@ -45,6 +46,7 @@ class Excercise extends Component {
                     
                     {this.renderSets()}
                 </div>
+                <LastTime />
                 
                 <button 
                     type="button" 
